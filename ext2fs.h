@@ -41,6 +41,10 @@
 #define EXT2S_MINOR_LEVEL 334
 
 
+// my additional macros
+#define S_ISDIR(m) (((m) & 0xF000) == 0x4000)
+
+#define EXT2_BLOCK_SIZE 1024 
 struct ext2_super_block {
     uint32_t inode_count; /* Total number of inodes in the fs */
     uint32_t block_count; /* Total number of blocks in the fs */

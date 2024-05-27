@@ -93,3 +93,6 @@ int main(int argc, char *argv[]) {
     close(fd);
     return 0;
 }
+
+// running the program:
+// ./recext2fs ./example.img 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00

@@ -1,0 +1,9 @@
+*
+!*.*
+!*/
+*.o
+*.img
+*.json
+!makefile
+
+# ignore linux executables

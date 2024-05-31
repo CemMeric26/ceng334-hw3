@@ -1,39 +1,38 @@
-# Compiler
 CXX = g++
 CC = gcc
-
-# Compiler flags
-CXXFLAGS = -Wall -std=c++11
-CFLAGS = -Wall
+CXXFLAGS = -Wall -g
+CFLAGS = -Wall -g
+LDFLAGS = -lm
 
 # Source files
-SRCS = recext2fs.cpp identifier.cpp ext2fs_print.c
+CPP_SRCS = recext2fs.cpp identifier.cpp
+C_SRCS = ext2fs_print.c
 
 # Object files
-OBJS = recext2fs.o identifier.o ext2fs_print.o
+CPP_OBJS = $(CPP_SRCS:.cpp=.o)
+C_OBJS = $(C_SRCS:.c=.o)
+OBJS = $(CPP_OBJS) $(C_OBJS)
 
 # Executable name
-TARGET = recext2fs
+EXEC = recext2fs
 
-# Build the executable
-all: $(TARGET)
+# Default target
+all: $(EXEC)
 
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+# Link the executable
+$(EXEC): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LDFLAGS)
 
 # Compile C++ source files
-recext2fs.o: recext2fs.cpp
-	$(CXX) $(CXXFLAGS) -c recext2fs.cpp
-
-identifier.o: identifier.cpp
-	$(CXX) $(CXXFLAGS) -c identifier.cpp
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Compile C source files
-ext2fs_print.o: ext2fs_print.c
-	$(CC) $(CFLAGS) -c ext2fs_print.c
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean up build files
+# Clean up object files and executable
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(EXEC)
 
 .PHONY: all clean

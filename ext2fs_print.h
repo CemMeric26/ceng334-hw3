@@ -18,7 +18,6 @@
 #define ext2_debug(f, a...) /**/
 #endif
 
-
 #define ext2_perror(str)                                 \
 {                                                        \
     perror(str);				         \
@@ -26,11 +25,18 @@
             __FILE__, __LINE__, __func__);               \
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void print_stat(const struct stat* st);
 void print_super_block(const struct ext2_super_block* super_block);
 void print_group_descriptor(const struct ext2_block_group_descriptor* group_descriptor);
 void print_dir_entry(const struct ext2_dir_entry* dir, const char* dir_name);
 void print_inode(const struct ext2_inode* inode, const int index);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
